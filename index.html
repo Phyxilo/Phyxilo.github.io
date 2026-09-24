@@ -144,6 +144,32 @@ figcaption{font-family:var(--mono);font-size:12px;color:var(--muted)}
 .socials a:hover{border-color:var(--paper)}
 .footer-row{display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap;padding-top:24px;border-top:1px solid #3A3D44;font-family:var(--mono);font-size:13px;color:#A9ADB5}
 
+/* Featured theses */
+.feature{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);gap:48px;align-items:start;padding-top:40px;border-top:1px solid var(--rule)}
+.feature-flip .feature-fig{order:2}
+.fig-plate{background:#fff;border:1px solid var(--rule);padding:16px}
+.fig-plate img{display:block;width:100%;height:auto}
+.feature-body{display:flex;flex-direction:column;gap:16px}
+.feature-body .meta{font-family:var(--mono);font-size:13px;color:var(--muted)}
+.feature-body h3{font-family:var(--serif);font-weight:400;font-size:30px;line-height:1.2}
+.feature-body p{color:var(--ink-2)}
+.results{margin:4px 0 0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;border-top:1px solid var(--ink);padding-top:16px}
+.results dt{font-family:var(--serif);font-size:24px;line-height:1.2}
+.results dd{margin:4px 0 0;font-size:14px;color:var(--ink-2);line-height:1.45}
+.feature-links{display:flex;flex-wrap:wrap;align-items:center;gap:8px 12px;margin-top:8px}
+.feature-links .btn-link{min-height:48px;display:inline-flex;align-items:center;font-weight:500}
+.subhead{font-size:15px;font-weight:600;padding-top:40px;border-top:1px solid var(--rule);margin-bottom:-16px}
+.cards{grid-template-columns:repeat(2,minmax(0,1fr))}
+@media (max-width:1000px){
+  .feature{grid-template-columns:1fr;gap:28px}
+  .feature-flip .feature-fig{order:0}
+  .feature-fig{max-width:620px}
+}
+@media (max-width:640px){
+  .results{grid-template-columns:1fr}
+  .feature-body h3{font-size:25px}
+}
+
 /* Responsive */
 @media (max-width:1000px){
   .nav-links a:not(.nav-cta){display:none}
@@ -300,14 +326,51 @@ figcaption{font-family:var(--mono);font-size:12px;color:var(--muted)}
       </div>
       <a href="https://github.com/Phyxilo">More on GitHub ↗</a>
     </div>
+
+    <article class="feature" id="msc-thesis">
+      <figure class="feature-fig">
+        <div class="fig-plate"><img src="assets/msc-multiplicity.png" width="1000" height="1063" loading="lazy" alt="Histogram of charged-track multiplicity at the primary vertex, comparing DsTau data with EPOS, Geant4, Pythia, DPMJET and QGSJET, with an MC-to-data ratio panel below."></div>
+        <figcaption>Charged-track multiplicity at the primary vertex: data (black) against five Monte Carlo generators, with the MC/data ratio below. Thesis Fig. 5.2.</figcaption>
+      </figure>
+      <div class="feature-body">
+        <div class="meta">MSc thesis · METU · 2024</div>
+        <h3>Study of proton interactions in the DsTau (NA65) experiment at the CERN-SPS</h3>
+        <p>The first analysis of DsTau's 2018 run. I developed <em>proton linking</em>, a method that follows each beam proton from the front of the emulsion module through the whole detector, so primary interactions in each tungsten target can be selected cleanly. Efficiencies are parametrised as a function of track density and taken from data, and the reconstructed vertices are compared with Monte Carlo event generators in multiplicity, track angle and impact parameter.</p>
+        <dl class="results">
+          <div><dt>1.08 ± 0.01 %/mm</dt><dd>Proton interaction rate in tungsten, data (EPOS MC: 1.06 ± 0.01)</dd></div>
+          <div><dt>EPOS</dt><dd>Best overall match to data in multiplicity and track angle</dd></div>
+          <div><dt>KNO-G</dt><dd>Scaling fit consistent with earlier experiments</dd></div>
+        </dl>
+        <div class="feature-links">
+          <a class="btn btn-primary" href="papers/yuksel-msc-thesis-2024.pdf">Read the thesis (PDF, 21 MB)</a>
+          <a class="btn-link" href="https://cds.cern.ch/record/2917039">CERN CDS record ↗</a>
+        </div>
+      </div>
+    </article>
+
+    <article class="feature feature-flip" id="bsc-project">
+      <figure class="feature-fig">
+        <div class="fig-plate"><img src="assets/bsc-roc.png" width="1200" height="634" loading="lazy" alt="ROC curve of background rejection versus signal efficiency for Likelihood, MLP and Fisher classifiers."></div>
+        <figcaption>Background rejection vs. signal efficiency for the three TMVA classifiers. Report Fig. 13.</figcaption>
+      </figure>
+      <div class="feature-body">
+        <div class="meta">BSc graduation project · METU · 2021</div>
+        <h3>Study of Ds decays with machine learning techniques</h3>
+        <p>A simulation study for DsTau before data-taking. I generated 400 GeV proton–nucleus interactions with Pythia for the Ds → τ signal and FLUKA for the hadronic background, computed kink angles and flight lengths from the particle momenta and vertices, and stored them as ROOT trees. Likelihood, Fisher and MLP classifiers in TMVA then separated signal from background using those two variables.</p>
+        <dl class="results">
+          <div><dt>68%</dt><dd>Signal efficiency with the Likelihood classifier</dd></div>
+          <div><dt>0.773</dt><dd>ROC integral, Likelihood (MLP 0.747, Fisher 0.698)</dd></div>
+          <div><dt>~3.5 mm</dt><dd>Mean Ds flight length in simulation</dd></div>
+        </dl>
+        <div class="feature-links">
+          <a class="btn btn-primary" href="papers/yuksel-bsc-report-2021.pdf">Read the report (PDF)</a>
+          <a class="btn-link" href="https://doi.org/10.13140/RG.2.2.23462.48962">ResearchGate DOI ↗</a>
+        </div>
+      </div>
+    </article>
+
+    <h3 class="subhead">More projects</h3>
     <div class="cards">
-      <article class="card">
-        <div class="meta">DsTau / NA65 · 2022 — now</div>
-        <h3>Primary proton interaction reconstruction</h3>
-        <p>A new method for selecting primary proton interactions in tungsten targets recorded in nuclear emulsion. Used to measure the proton interaction length, test KNO-G scaling, and benchmark Monte Carlo generators.</p>
-        <ul class="tags"><li>ROOT</li><li>C++</li><li>Monte Carlo</li></ul>
-        <a href="https://cds.cern.ch/record/2917039">MSc thesis (CERN CDS) ↗</a>
-      </article>
       <article class="card">
         <div class="meta">BOOST-NLO · 2026</div>
         <h3>Removing negative weights from NLO Monte Carlo</h3>
@@ -332,13 +395,6 @@ figcaption{font-family:var(--mono);font-size:12px;color:var(--muted)}
         <h3>LLM agents, data pipelines &amp; Turkish speech</h3>
         <p>Synthetic and scraped training data for LLMs, a Whisper model fine-tuned on Turkish audio, multi-step LLM agents, and pretrained-model human detection and tracking.</p>
         <ul class="tags"><li>LLMs</li><li>Whisper</li><li>Computer vision</li></ul>
-      </article>
-      <article class="card">
-        <div class="meta">BSc thesis · 2020 — 2021</div>
-        <h3>Ds decays with machine learning</h3>
-        <p>Multivariate particle selection in ROOT's TMVA, using kink angle and flight length to identify particles and estimate selection efficiency.</p>
-        <ul class="tags"><li>ROOT / TMVA</li><li>Multivariate ML</li></ul>
-        <a href="https://doi.org/10.13140/RG.2.2.23462.48962">Read the thesis ↗</a>
       </article>
     </div>
   </div>
