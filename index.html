@@ -149,6 +149,7 @@ figcaption{font-family:var(--mono);font-size:12px;color:var(--muted)}
 .feature-flip .feature-fig{order:2}
 .fig-plate{background:#fff;border:1px solid var(--rule);padding:16px}
 .fig-plate img{display:block;width:100%;height:auto}
+.fig-stack{display:flex;flex-direction:column;gap:12px}
 .feature-body{display:flex;flex-direction:column;gap:16px}
 .feature-body .meta{font-family:var(--mono);font-size:13px;color:var(--muted)}
 .feature-body h3{font-family:var(--serif);font-weight:400;font-size:30px;line-height:1.2}
@@ -348,6 +349,50 @@ figcaption{font-family:var(--mono);font-size:12px;color:var(--muted)}
       </div>
     </article>
 
+    <article class="feature feature-flip" id="gamma-kalkani">
+      <figure class="feature-fig">
+        <div class="fig-plate fig-stack">
+          <img src="assets/gamma-raytrace.png" width="1071" height="622" loading="lazy" alt="Geant4 visualisation of gamma-ray tracks leaving the collimated detector head, entering soil and scattering off a buried star-shaped mine.">
+          <img src="assets/gamma-star-reco.jpg" width="1280" height="294" loading="lazy" alt="Four 2D backscatter intensity maps of the star-shaped mine, the shape becoming clearer from left to right as statistics increase.">
+        </div>
+        <figcaption>Top: Geant4 ray tracing of collimated gammas scattering off a buried star-shaped mine. Bottom: 2D backscatter reconstructions of the same mine with increasing statistics.</figcaption>
+      </figure>
+      <div class="feature-body">
+        <div class="meta">Gamma Kalkani · 2026 — now</div>
+        <h3>A portable dual-gamma backscatter detector for plastic landmines</h3>
+        <p>Metal detectors miss minimum-metal and plastic anti-personnel mines. This detector sends collimated gammas from a <sup>22</sup>Na source into the soil and reads the Compton backscatter with LYSO scintillators and SiPM arrays, picking up the density and Z<sub>eff</sub> contrast between explosive and soil. I led the full 3D Geant4 model (source, tungsten/lead collimator, scintillators and SiPM rings) and am now building the prototype around it: custom SiPM boards with time-over-threshold front-ends and an FPGA readout.</p>
+        <dl class="results">
+          <div><dt>Star mine</dt><dd>Irregular mine shape resolved against soil in simulated 2D scans</dd></div>
+          <div><dt>16 SiPMs</dt><dd>Circular readout board fabricated to match the Geant4 pixel layout</dd></div>
+          <div><dt>Artix-7</dt><dd>FPGA readout in development; first <sup>22</sup>Na scintillation pulses recorded</dd></div>
+        </dl>
+        <div class="feature-links">
+          <a class="btn btn-primary" href="papers/gamma-kalkani-status-2026.pdf">Project status report (PDF)</a>
+        </div>
+      </div>
+    </article>
+
+    <article class="feature" id="boost-nlo">
+      <figure class="feature-fig">
+        <div class="fig-plate"><img src="assets/boost-dy-weights.png" width="989" height="589" loading="lazy" alt="Histogram of Drell-Yan event weights on a log scale: the original NLO weights include a negative spike, Born spreading narrows them, and the BDT-smoothed weights are all positive."></div>
+        <figcaption>Drell-Yan event weights: original NLO (grey) with its negative band, Born spreading (red), and the BDT-smoothed weights (blue), all positive. Report Fig. 16.</figcaption>
+      </figure>
+      <div class="feature-body">
+        <div class="meta">BOOST-NLO · 2026</div>
+        <h3>Weight smoothing in NLO Monte Carlo with gradient-boosted trees</h3>
+        <p>NLO generators with MC@NLO matching produce a fraction of negatively weighted events, which costs statistical power and CPU time. I treated the subtraction weights as a regression problem and trained XGBoost models with a custom asymmetric loss to smooth them for Drell-Yan, bb̄ and tt̄ production, benchmarked against Born spreading. A single model trained on mixed processes failed because of their very different cross-section scales, so the final pipeline routes each process to its own model.</p>
+        <dl class="results">
+          <div><dt>0%</dt><dd>Negative-weight fraction after smoothing, per process and in the routed pipeline</dd></div>
+          <div><dt>≤ 0.8%</dt><dd>Raw cross-section shift before a global rescale (Drell-Yan ~0%, bb̄ 0.1%, tt̄ 0.8%)</dd></div>
+          <div><dt>3 channels</dt><dd>Invariant mass, p<sub>T</sub> and η preserved for Drell-Yan, bb̄ and tt̄</dd></div>
+        </dl>
+        <div class="feature-links">
+          <a class="btn btn-primary" href="papers/yuksel-boost-nlo-2026.pdf">Read the report (PDF)</a>
+          <a class="btn-link" href="https://doi.org/10.13140/RG.2.2.21398.10561">ResearchGate DOI ↗</a>
+        </div>
+      </div>
+    </article>
+
     <article class="feature feature-flip" id="bsc-project">
       <figure class="feature-fig">
         <div class="fig-plate"><img src="assets/bsc-roc.png" width="1200" height="634" loading="lazy" alt="ROC curve of background rejection versus signal efficiency for Likelihood, MLP and Fisher classifiers."></div>
@@ -371,19 +416,6 @@ figcaption{font-family:var(--mono);font-size:12px;color:var(--muted)}
 
     <h3 class="subhead">More projects</h3>
     <div class="cards">
-      <article class="card">
-        <div class="meta">BOOST-NLO · 2026</div>
-        <h3>Removing negative weights from NLO Monte Carlo</h3>
-        <p>A boosted-decision-tree pipeline that eliminates negative event weights in next-to-leading-order simulations while preserving multi-process kinematic distributions.</p>
-        <ul class="tags"><li>BDTs</li><li>Python</li><li>Event generators</li></ul>
-        <a href="https://doi.org/10.13140/RG.2.2.21398.10561">Read the report ↗</a>
-      </article>
-      <article class="card">
-        <div class="meta">Gamma Kalkani · 2026 — now</div>
-        <h3>Scintillator gamma detector, simulated then built</h3>
-        <p>Led the Geant4 feasibility study, then moved to hardware: an FPGA-based readout prototype, now taking first measurements and calibrating detection efficiency against the simulation.</p>
-        <ul class="tags"><li>Geant4</li><li>FPGA</li><li>Detector R&amp;D</li></ul>
-      </article>
       <article class="card">
         <div class="meta">Enterprise AI · 2026 — now</div>
         <h3>Conversational AI inside an ERP</h3>
